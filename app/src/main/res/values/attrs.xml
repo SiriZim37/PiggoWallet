@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="title_header" format="string" />
+    <attr name="menuIcon1" format="reference" />
+    <attr name="menuIcon2" format="reference" />
+    <attr name="menuIcon3" format="reference" />
+    <attr name="enableNavigationIcon" format="boolean" />
+    <attr name="title" format="reference" />
+    <attr name="titleLeft" format="reference" />
+    <attr name="navigationIcon" format="reference" />
+    <attr name="textAutoSizing" format="boolean" />
+
+    <attr name="isShowProgressLoadmore" />
+    <attr name="menuTitle" format="reference" />
+    <attr name="menuTitle2" format="reference" />
+    <attr name="iconTitle" format="reference" />
+    <attr name="text" format="reference" />
+    <attr name="minimumComplete" format="integer" />
+    <attr name="minProgress" format="integer" />
+    <attr name="maxProgress" format="integer" />
+    <attr name="imageResource" format="reference" />
+    <attr name="maximumImage" format="integer" />
+    <attr name="hint" format="reference" />
+    <attr name="iconColor" format="reference" />
+    <attr name="iconDrawable" format="reference" />
+
+    <declare-styleable name="ToolbarWidget">
+        <attr name="title" />
+        <attr name="titleLeft" />
+        <attr name="menuTitle" />
+        <attr name="menuTitle2" />
+        <attr name="iconTitle" />
+        <attr name="navigationIcon" />
+        <attr name="menuIcon1" />
+        <attr name="menuIcon2" />
+        <attr name="menuIcon3" />
+        <attr name="enableNavigationIcon" />
+        <attr name="toolbarSize" />
+    </declare-styleable>
+
+    <attr name="toolbarSize" format="enum">
+        <enum name="normal" value="0" />
+        <enum name="medium" value="1" />
+        <enum name="large" value="2" />
+        <enum name="search" value="3" />
+        <enum name="other" value="4" />
+    </attr>
+
+</resources>

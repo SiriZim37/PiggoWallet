@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_large_height"
+    android:background="@color/purple_700">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/widget_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/widget_toolbar_navigation"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="start"
+            android:paddingTop="7dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="7dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/ic_arrow_left" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/widget_toolbar_txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/custom_bold"
+            android:text="Title หัวเรื่อง"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_toolbar"
+            android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/widget_toolbar_txt_title_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/custom_bold"
+            android:text="Title หัวเรื่อง"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_toolbar"
+            android:visibility="gone" />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+</FrameLayout>

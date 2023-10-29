@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".module.main.BookFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bg_icon_circle_pink"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginRight="@dimen/margin_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/calendar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bg_icon_circle_blue"
+            android:layout_marginRight="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/profile"
+            app:layout_constraintTop_toTopOf="@+id/profile" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/notify"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bg_icon_circle_green"
+            android:layout_marginRight="@dimen/margin_small"
+            app:layout_constraintEnd_toStartOf="@+id/calendar"
+            app:layout_constraintTop_toTopOf="@+id/profile" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_inoutbound"
+            style="@style/MyCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="@dimen/margin_large"
+            app:layout_constraintTop_toBottomOf="@+id/profile">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:paddingTop="@dimen/margin_12">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/h_income"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="start"
+                    android:text="INCOME"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/amt_income"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="right"
+                    android:paddingStart="10dp"
+                    android:text="1000"
+                    android:textColor="@color/bg_btn_blue"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_constraintEnd_toEndOf="@+id/h_income"
+                    app:layout_constraintStart_toStartOf="@+id/h_income"
+                    app:layout_constraintTop_toBottomOf="@+id/h_income" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/h_outcome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="start"
+                    android:text="OUTCOME"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/amt_outcome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="right"
+                    android:paddingStart="10dp"
+                    android:text="200"
+                    android:textColor="@color/cherry_red"
+                    android:textSize="@dimen/text_medium_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/h_outcome"
+                    app:layout_constraintTop_toBottomOf="@+id/h_outcome" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_inoutbound">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--            <androidx.cardview.widget.CardView-->
+                <!--                android:id="@+id/early_notification_cv"-->
+                <!--                style="@style/MyCardView_Margin_Normal"-->
+                <!--                android:layout_width="0dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toBottomOf="@+id/full_name">-->
+
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/car_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </FrameLayout>
+
+
+                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+                <!--            </androidx.cardview.widget.CardView>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--    </androidx.core.widget.NestedScrollView>-->
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_addItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="@color/purple_200"
+            android:contentDescription="@string/app_name"
+            android:padding="4dp"
+            android:src="@drawable/bg_icon_circle_green"
+            android:visibility="visible"
+            app:backgroundTint="@color/purple_200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="cherry_red">#EB0C1F</color>
+    <color name="indicator_unactive">#cccccc</color>
+    <color name="ripper_button_color">#dddddd</color>
+    <color name="tablayout_indicator">#fdaf9c</color>
+    <color name="terracotta_3">#FA957C</color>
+    <color name="brown">#813522</color>
+    <color name="bg_skip">#68d5b8</color>
+    <color name="warm_grey">#959595</color>
+    <color name="bg_btn_blue">#307DFA</color>
+    <color name="darkblue">#4d4afb</color>
+    <color name="normalblue">#307DFA</color>
+    <color name="bg_disable">#e1e1e1</color>
+
+    <color name="sidebar_menu_title">#666666</color>
+</resources>
