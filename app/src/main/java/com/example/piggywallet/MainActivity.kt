@@ -3,7 +3,7 @@ package com.example.piggywallet
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.piggywallet.module.main.AnalyticFragment
-import com.example.piggywallet.module.main.BookFragment
+import com.example.piggywallet.module.main.BookMainFragment
 import com.example.piggywallet.module.main.SettingFragment
 import com.example.piggywallet.module.main.WalletFragment
 import com.google.android.material.tabs.TabLayout
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun  initInstances(){
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, BookFragment()).commit()
+            .add(R.id.container, BookMainFragment()).commit()
 
         tabLayout.addOnTabSelectedListener(object :
             com.google.android.material.tabs.TabLayout.OnTabSelectedListener {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     tab!!.position == 0 -> { supportFragmentManager.beginTransaction()
                         .replace(
                             R.id.container,
-                            BookFragment()
+                            BookMainFragment()
                         ).commit() }
                     tab.position == 1 -> { supportFragmentManager.beginTransaction()
                         .replace(

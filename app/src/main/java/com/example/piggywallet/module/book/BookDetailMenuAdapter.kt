@@ -26,11 +26,13 @@ class BookDetailMenuAdapter(private val items: List<BookDetailViewModel.BookMenu
             val item = items[adapterPosition]
 
             itemView.txt_menu.text = item.menuName
-//            if(item.m == "M1") {
-//                itemView.icon_type.setImageResource(R.drawable.item_calorien)
-//            }else if(item.mtype == "M2"){
-//                itemView.icon_type.setImageResource(R.drawable.item_trainning)
-//            }  else if(item.mtype == "M3"){
+            if(item.menuTYPE== "INCOME") {
+                itemView.icon_type.setImageResource(R.drawable.item_saving)
+            }
+            else if(item.menuTYPE == "OUTCOME"){
+                itemView.icon_type.setImageResource(R.drawable.item_outcome)
+            }
+ //            else if(item.mtype == "M3"){
 //                itemView.icon_type.setImageResource(R.drawable.item_food_select)
 //            }else{
 //                itemView.icon_type.setImageResource(R.drawable.item_centercare)
@@ -41,7 +43,7 @@ class BookDetailMenuAdapter(private val items: List<BookDetailViewModel.BookMenu
 
         private val onDetailClick = View.OnClickListener {
             val item = items[adapterPosition]
-            listener.onDetailClick(adapterPosition, item.menuID)
+            listener.onDetailClick(adapterPosition, item)
         }
 
         init {
@@ -50,7 +52,7 @@ class BookDetailMenuAdapter(private val items: List<BookDetailViewModel.BookMenu
     }
 
     interface Listener {
-        fun onDetailClick(index: Int, item: String)
+        fun onDetailClick(index: Int, item: BookDetailViewModel.BookMenusItem)
 
     }
 

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_exit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/custom_regular"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="X"
+            android:textColor="@color/warm_grey"
+            android:textSize="@dimen/text_xxlarge_header_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lay_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
+            android:paddingStart="@dimen/padding_large"
+            android:paddingEnd="@dimen/padding_large"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_exit">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_menusID"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_regular"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="IN/OUT"
+                android:textColor="@color/bg_btn_blue"
+                android:textSize="@dimen/text_xxlarge_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_exit" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittext_amt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_large"
+                android:background="@drawable/bg_edittext"
+                android:drawablePadding="10dp"
+                android:paddingStart="@dimen/padding_normal"
+                android:hint="100.00..."
+                android:maxLength="50"
+                android:singleLine="true"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_title"
+                app:layout_constraintTop_toTopOf="@+id/txt_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_regular"
+                android:paddingStart="10dp"
+                android:text="IN/OUT"
+                android:textColor="@color/bg_btn_blue"
+                android:textSize="@dimen/text_large_size"
+                android:layout_marginTop="@dimen/margin_large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_menusID"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittext_description"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_edittext"
+                android:drawablePadding="10dp"
+                android:gravity="top"
+                android:paddingStart="@dimen/padding_normal"
+                android:hint="*receive  a gift from Anna..."
+                android:maxLength="150"
+                android:singleLine="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/edittext_amt"
+                app:layout_constraintTop_toTopOf="@+id/txt_des" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_des"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/custom_regular"
+                android:paddingStart="10dp"
+                android:layout_marginTop="@dimen/margin_large"
+                android:text="NOTE"
+                android:textColor="@color/bg_btn_blue"
+                android:textSize="@dimen/text_large_size"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_del" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_red"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_button_size"
+                app:layout_constraintBottom_toBottomOf="@+id/edittext_amt"
+                app:layout_constraintEnd_toEndOf="@+id/edittext_amt"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintTop_toTopOf="@+id/edittext_amt"
+                android:text="Del" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_green_light"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_button_size"
+                android:layout_marginTop="@dimen/margin_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintTop_toBottomOf="@+id/edittext_description"
+                android:text="OK" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

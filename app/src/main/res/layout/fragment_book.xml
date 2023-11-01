@@ -4,39 +4,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".module.main.BookFragment">
+    tools:context=".module.main.BookMainFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/profile"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_outcome"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/bg_icon_circle_pink"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="160dp"
+            app:cardElevation="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/card_calendar"
+            app:layout_constraintTop_toTopOf="@+id/card_calendar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bg_outcome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_outcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/item_saving"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_income"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="160dp"
+            app:cardElevation="16dp"
+            android:layout_marginEnd="@dimen/margin_normal"
+            app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
+            app:layout_constraintTop_toTopOf="@+id/card_calendar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bg_income"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_icon_circle_green"
+                android:layout_margin="4dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/item_outcome"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outcome"
+            app:layout_constraintEnd_toEndOf="@+id/card_outcome"
+            app:layout_constraintStart_toStartOf="@+id/card_outcome"
+            app:layout_constraintTop_toBottomOf="@id/card_outcome" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Income"
+            app:layout_constraintEnd_toEndOf="@+id/card_income"
+            app:layout_constraintStart_toStartOf="@+id/card_income"
+            app:layout_constraintTop_toBottomOf="@id/card_income" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            app:layout_constraintEnd_toEndOf="@+id/card_calendar"
+            app:layout_constraintStart_toStartOf="@+id/card_calendar"
+            app:layout_constraintTop_toBottomOf="@id/card_calendar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_calendar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="160dp"
+            app:cardElevation="16dp"
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginRight="@dimen/margin_medium"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/calendar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/bg_icon_circle_blue"
-            android:layout_marginRight="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@+id/profile"
-            app:layout_constraintTop_toTopOf="@+id/profile" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/notify"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/bg_icon_circle_green"
-            android:layout_marginRight="@dimen/margin_small"
-            app:layout_constraintEnd_toStartOf="@+id/calendar"
-            app:layout_constraintTop_toTopOf="@+id/profile" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ic_calendar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_inoutbound"
@@ -46,7 +141,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_margin="@dimen/margin_large"
-            app:layout_constraintTop_toBottomOf="@+id/profile">
+            app:layout_constraintTop_toBottomOf="@+id/card_income">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -71,14 +166,16 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/amt_income"
-                    android:layout_width="0dp"
+                    style="@style/Text_Bold_Large"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/custom_regular"
                     android:gravity="right"
                     android:paddingStart="10dp"
                     android:text="1000"
                     android:textColor="@color/bg_btn_blue"
-                    android:textSize="@dimen/text_medium_size"
+                    android:hint="0.00"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/h_income"
                     app:layout_constraintStart_toStartOf="@+id/h_income"
                     app:layout_constraintTop_toBottomOf="@+id/h_income" />
@@ -97,14 +194,16 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/amt_outcome"
-                    android:layout_width="0dp"
+                    style="@style/Text_Bold_Large"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/custom_regular"
                     android:gravity="right"
                     android:paddingStart="10dp"
                     android:text="200"
                     android:textColor="@color/cherry_red"
-                    android:textSize="@dimen/text_medium_size"
+                    android:hint="0.00"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/h_outcome"
                     app:layout_constraintTop_toBottomOf="@+id/h_outcome" />
@@ -149,7 +248,7 @@
                         android:layout_height="match_parent">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/car_recyclerView"
+                            android:id="@+id/book_recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </FrameLayout>
@@ -167,18 +266,31 @@
 
          <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_addItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_margin="@dimen/margin_medium"
             android:background="@color/purple_200"
             android:contentDescription="@string/app_name"
-            android:padding="4dp"
-            android:src="@drawable/bg_icon_circle_green"
             android:visibility="visible"
-            app:backgroundTint="@color/purple_200"
+
+            app:backgroundTint="@color/bg_btn_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon_add_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/notes"
+            android:tint="@color/white"
+            android:elevation="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_addItem"
+            app:layout_constraintEnd_toEndOf="@+id/fab_addItem"
+            app:layout_constraintStart_toStartOf="@+id/fab_addItem"
+            app:layout_constraintTop_toTopOf="@+id/fab_addItem" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

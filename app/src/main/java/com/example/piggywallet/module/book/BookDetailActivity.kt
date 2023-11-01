@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.piggywallet.R
 import com.example.piggywallet.manager.db.datamodel.BookMenus
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_bookdetail.*
+import kotlinx.android.synthetic.main.fragment_dialog_bottom_sheet.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
@@ -36,10 +38,10 @@ class BookDetailActivity : AppCompatActivity() , CoroutineScope by CoroutineScop
 
 //        swipe_refresh.isRefreshing = false
         recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.layoutManager = GridLayoutManager(this, 3)
+        recycler_view.layoutManager = GridLayoutManager(this, 4)
 
         recycler_view2.layoutManager = LinearLayoutManager(this)
-        recycler_view2.layoutManager = GridLayoutManager(this, 3)
+        recycler_view2.layoutManager = GridLayoutManager(this, 4)
 
         viewModel.allBookMenus.observe(this, Observer { bookMenus ->
             bookMenus?.let {
@@ -55,6 +57,8 @@ class BookDetailActivity : AppCompatActivity() , CoroutineScope by CoroutineScop
                 }
             }
         })
+
+//        viewModel.getData()
     }
 
     fun initViewModel(){
@@ -72,8 +76,37 @@ class BookDetailActivity : AppCompatActivity() , CoroutineScope by CoroutineScop
 
     }
 
-    override fun onDetailClick(index: Int, item: String) {
-        TODO("Not yet implemented")
+    fun showDialog( itemID: BookDetailViewModel.BookMenusItem){
+        // on below line we are creating a new bottom sheet dialog.
+        val dialog = BottomSheetDialog(this)
+        val view = layoutInflater.inflate(R.layout.fragment_dialog_bottom_sheet, null)
+        view.txt_menusID.setText(itemID.menuName)
+        view.btn_del.setOnClickListener {
+            view.txt_menusID.setText("")
+            dialog.dismiss()
+        }
+        view.btn_confirm.setOnClickListener {
+            viewModel.saveData( itemID.menuID ,
+                itemID.menuName ,
+                view.edittext_amt.text.toString() ,
+                view.edittext_description.text.toString() ,
+                itemID.menuTYPE )
+            dialog.dismiss()
+        }
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
+
+    }
+    override fun onDetailClick(index: Int, itemID: BookDetailViewModel.BookMenusItem) {
+        try {
+            if(itemID.menuID !="" ){
+                showDialog(itemID)
+            }
+
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 
     companion object{

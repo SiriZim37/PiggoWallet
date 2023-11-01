@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.piggywallet.module.main.AnalyticFragment
-import com.example.piggywallet.module.main.BookFragment
+import com.example.piggywallet.module.main.BookMainFragment
 import com.example.piggywallet.module.main.SettingFragment
 import com.example.piggywallet.module.main.WalletFragment
 
@@ -19,7 +19,7 @@ class MenuPageFragmentAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return if ( position == 0 )
-            BookFragment()
+            BookMainFragment()
         else if ( position == 2 )
             WalletFragment()
         else if ( position == 3 )

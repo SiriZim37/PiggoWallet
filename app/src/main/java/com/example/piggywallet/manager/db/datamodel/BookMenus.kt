@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "book_menu_table")
+@Entity(tableName = "book_menu_tb")
 data class BookMenus(
     @PrimaryKey
     @ColumnInfo(name = "menu_id")

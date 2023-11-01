@@ -7,24 +7,30 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.piggywallet.MainApplication
 import com.example.piggywallet.manager.db.datamodel.BookMenus
+import com.example.piggywallet.manager.db.datamodel.BookNote
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
-@Database(entities = [BookMenus::class],version = 1,exportSchema = false)
+@Database(entities = [ BookMenus::class , BookNote ::class ] ,version = 1,exportSchema = false)
+
 abstract class RoomDatabaseManager : RoomDatabase() {
 
-    abstract fun masterBookMenuDao(): BookMenusDao
+    abstract fun roomDBDao(): RoomDBDao
 
     companion object {
         @Volatile
         private var INSTANCE: RoomDatabaseManager? = null
 
-        fun getInstance(context:Context):RoomDatabaseManager{
+        fun getInstance(context:Context): RoomDatabaseManager {
             /** Multiple Thread cannot access to DB at the Same time*/
             synchronized(this){
+
+                    var instance = INSTANCE
+
                 //smart cast : Copy Current Value
-                var instance = INSTANCE
+
                 // if instance exits don't create again return this but if not Create the Database
                 /** Migration Object is an Object that define how take all row with old schema
                  * and Convert them to rows in new Schema
@@ -32,15 +38,15 @@ abstract class RoomDatabaseManager : RoomDatabase() {
                  *
                  * But in this lab We don't use migration,if anything change?? destroy and rebuild
                  * */
+                    if(instance == null){
+                        instance = Room.databaseBuilder(
+                            context,
+                            RoomDatabaseManager::class.java,
+                            "piggo_db").fallbackToDestructiveMigration().build()
+                        INSTANCE = instance
+                    }
+                    return instance
 
-                if(instance == null){
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        RoomDatabaseManager::class.java,
-                        "book_menu_table").fallbackToDestructiveMigration().build()
-                    INSTANCE = instance
-                }
-                return instance
             }
         }
 
