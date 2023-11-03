@@ -18,8 +18,8 @@ This app is to play around learning about Kotlin. Users will be able to manage t
 ## Features 
 
 - [x] Book
-- [x] Wallet
-- [x] Analztics
-- [x] Setting
+- [ ] Wallet
+- [ ] Analztics
+- [ ] Setting
 - [x] Book Detail
 
