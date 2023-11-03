@@ -1,6 +1,6 @@
 # PiggoWallet 
 
-## Demo 
+# Example source code 
 This app is to play around learning about Kotlin. Users will be able to manage their daily spending and can search for shows and days they want to watch.
 
 
