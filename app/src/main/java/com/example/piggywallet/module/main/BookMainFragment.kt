@@ -1,7 +1,10 @@
 package com.example.piggywallet.module.main
 
 
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +27,9 @@ import kotlinx.android.synthetic.main.fragment_dialog_bottom_sheet.view.edittext
 import kotlinx.android.synthetic.main.fragment_dialog_bottom_sheet.view.edittext_description
 import kotlinx.android.synthetic.main.fragment_dialog_bottom_sheet.view.txt_menusID
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +49,9 @@ class BookMainFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var income_cal: Int? = null
+    private var outcome_cal: Int? = null
+    private lateinit var itemInAndOutcome : ArrayList<BookNote>
 
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(BookMainViewModel::class.java)
@@ -50,6 +59,7 @@ class BookMainFragment : Fragment() {
 
     private var selectIncome : Boolean = false
     private var selectOutcome: Boolean = false
+    private var filterCalendar : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +77,7 @@ class BookMainFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_book, container, false)
 
         initInstance()
+        initViewModel()
 
          view.fab_addItem.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -75,78 +86,37 @@ class BookMainFragment : Fragment() {
         }
 
         view.card_income.setOnClickListener {
-            if(selectIncome) {
-                selectIncome = false
-                bg_income.setBackgroundResource(R.drawable.bg_icon_circle_white)
-                viewModel.allInOutMainBook.observe(viewLifecycleOwner , Observer {
-                    it.let {
-                        try {
-                            book_recyclerView.layoutManager = LinearLayoutManager(context)
-                            val adapter = book_recyclerView.adapter as BookMainAdapter
-                            adapter.updateItems(it)
-                        }catch (e : Exception){
-                            e.printStackTrace()
-                        }
-                    }
-                })
-                return@setOnClickListener
-            }
-            selectIncome = true
-            selectOutcome= false
-            bg_income.setBackgroundResource(R.drawable.bg_icon_circle_green)
-            bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_white)
-
-            viewModel.allIncomeMainBook.observe(viewLifecycleOwner , Observer {
-                it.let {
-                    try {
-                        book_recyclerView.layoutManager = LinearLayoutManager(context)
-                        val adapter = book_recyclerView.adapter as BookMainAdapter
-                        adapter.updateItems(it)
-//
-                    }catch (e : Exception){
-                        e.printStackTrace()
-                    }
-                }
-            })
+            selectMenuInAndOut("INCOME")
         }
 
         view.card_outcome.setOnClickListener {
-            if(selectOutcome) {
-                selectOutcome = false
-                bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_white)
-                viewModel.allInOutMainBook.observe(viewLifecycleOwner , Observer {
-                    it.let {
-                        try {
-                            updateDataList(it)
-                        }catch (e : Exception){
-                            e.printStackTrace()
-                        }
-                    }
-                })
+            selectMenuInAndOut("OUTCOME")
+        }
+
+        view.swipe_refresh.setOnRefreshListener {
+            view.swipe_refresh.isRefreshing = false
+            allInOutMainBookUpdate()
+        }
+
+        view.card_calendar.setOnClickListener {
+            if(filterCalendar) {
+                filterCalendar = false
+                card_calendar.setBackgroundResource(R.drawable.bg_icon_circle_white)
+                allInOutMainBookUpdate()
                 return@setOnClickListener
             }
-            selectOutcome = true
-            selectIncome = false
-
+            filterCalendar = true
+            card_calendar.setBackgroundResource(R.drawable.bg_icon_circle_green)
             bg_income.setBackgroundResource(R.drawable.bg_icon_circle_white)
-            bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_green)
-
-            viewModel.allOutcomeMainBook.observe(viewLifecycleOwner , Observer {
-                it.let {
-                    try {
-                        updateDataList(it)
-
-                    }catch (e : Exception){
-                        e.printStackTrace()
-                    }
-                }
-            })
+            bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_white)
+            showDialog()
         }
+
+        view.edit_text_search.addTextChangedListener(textWatcher)
 
         return view
     }
     private fun initInstance() {
-
 
         viewModel.allInOutMainBook.observe(viewLifecycleOwner, Observer { inoutMain ->
             inoutMain?.let {
@@ -164,6 +134,9 @@ class BookMainFragment : Fragment() {
                         )
                         list.add(dataList)
                     }
+                    list.sortBy { it.date }
+                    itemInAndOutcome = list
+
                     book_recyclerView.layoutManager = LinearLayoutManager(context)
                     book_recyclerView.adapter = BookMainAdapter(list)
 
@@ -173,15 +146,21 @@ class BookMainFragment : Fragment() {
             }
         })
 
+
         viewModel.inComeTotal.observe(viewLifecycleOwner , Observer {
             it.let {
+                income_cal = it.toInt()
                 amt_income.text = it
             }
         })
 
         viewModel.outComeTotal.observe(viewLifecycleOwner , Observer {
             it.let {
-                amt_outcome.text = it
+                outcome_cal = it.toInt()
+                val sb = StringBuilder()
+                amt_outcome.text = sb.append("-").append(it)
+                if(income_cal != null && outcome_cal != null)
+                 total_amt.text = ( income_cal!!.minus(outcome_cal!!)  ).toString()
             }
         })
 
@@ -190,6 +169,86 @@ class BookMainFragment : Fragment() {
 
     private fun initViewModel(){
 
+        viewModel.whenDataLoadedInOutMainBookByDate.observe(viewLifecycleOwner , Observer {
+          it.let {
+              updateDataList(it)
+          }
+        })
+
+        viewModel.whenDataLoadedBook.observe(viewLifecycleOwner , Observer {
+            it.let {
+                updateDataList(it)
+            }
+        })
+
+
+    }
+
+    fun selectMenuInAndOut( type : String){
+        if( type == "OUTCOME"){
+            if(selectOutcome) {
+                selectOutcome = false
+                bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_white)
+                allInOutMainBookUpdate()
+                return
+            }
+            selectOutcome = true
+            selectIncome = false
+
+            bg_income.setBackgroundResource(R.drawable.bg_icon_circle_white)
+            bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_green)
+            card_calendar.setBackgroundResource(R.drawable.bg_icon_circle_white)
+
+            viewModel.allOutcomeMainBook.observe(viewLifecycleOwner , Observer {
+                it.let {
+                    try {
+                        updateDataList(it)
+
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }
+                }
+            })
+
+        }else if( type == "INCOME"){
+            if(selectIncome) {
+                selectIncome = false
+                bg_income.setBackgroundResource(R.drawable.bg_icon_circle_white)
+
+                return
+            }
+            selectIncome = true
+            selectOutcome= false
+            bg_income.setBackgroundResource(R.drawable.bg_icon_circle_green)
+            bg_outcome.setBackgroundResource(R.drawable.bg_icon_circle_white)
+            card_calendar.setBackgroundResource(R.drawable.bg_icon_circle_white)
+
+            viewModel.allIncomeMainBook.observe(viewLifecycleOwner , Observer {
+                it.let {
+                    try {
+                        book_recyclerView.layoutManager = LinearLayoutManager(context)
+                        val adapter = book_recyclerView.adapter as BookMainAdapter
+                        adapter.updateItems(it)
+//
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }
+                }
+            })
+        }
+
+    }
+
+    fun allInOutMainBookUpdate(){
+        viewModel.allInOutMainBook.observe(viewLifecycleOwner , Observer {
+            it.let {
+                try {
+                    updateDataList(it)
+                }catch (e : Exception){
+                    e.printStackTrace()
+                }
+            }
+        })
     }
 
     fun updateDataList( items : List<BookNote>){
@@ -198,26 +257,53 @@ class BookMainFragment : Fragment() {
         adapter.updateItems(items)
     }
 
+    fun filterCalendar( date : String){
+
+
+        viewModel.InOutOnlyByDate(date ,itemInAndOutcome )
+    }
+
     fun showDialog( ){
 
-//        val dialog = BottomSheetDialog(this)
-//        val view = layoutInflater.inflate(R.layout.fragment_dialog_bottom_sheet, null)
-//        view.txt_menusID.setText(itemID.menuName)
-//        view.btn_del.setOnClickListener {
-//            view.txt_menusID.setText("")
-//            dialog.dismiss()
+        var cal = Calendar.getInstance()
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            val myFormat = "dd/MM/yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+//            textView.text = sdf.format(cal.time)
+            val date =  sdf.format(cal.time)
+            filterCalendar(date)
+
+        }
+
+//        textView.setOnClickListener {
+        context?.let {
+            DatePickerDialog(
+                it, dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
 //        }
-//        view.btn_confirm.setOnClickListener {
-//            viewModel.saveData( itemID.menuID ,
-//                itemID.menuName ,
-//                view.edittext_amt.text.toString() ,
-//                view.edittext_description.text.toString() ,
-//                itemID.menuTYPE )
-//            dialog.dismiss()
-//        }
-//        dialog.setCancelable(false)
-//        dialog.setContentView(view)
-//        dialog.show()
+
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            viewModel.getSearchBook(s.toString() , itemInAndOutcome)
+        }
 
     }
 

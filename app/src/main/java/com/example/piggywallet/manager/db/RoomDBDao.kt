@@ -43,15 +43,21 @@ interface RoomDBDao {
     @Query("SELECT * FROM book_note_tb ORDER BY date  ASC")
     fun getAllInAndOutCome(): LiveData<List<BookNote>>
 
-    @Query("SELECT * FROM book_note_tb WHERE menu_type = 'INCOME' ORDER BY date  ASC")
+    @Query("SELECT * FROM book_note_tb WHERE menu_type = 'INCOME' ORDER BY date  DESC")
     fun getAllIncomeData(): LiveData<List<BookNote>>
 
-    @Query("SELECT * FROM book_note_tb WHERE menu_type = 'OUTCOME' ORDER BY date  ASC")
+    @Query("SELECT * FROM book_note_tb WHERE menu_type = 'OUTCOME' ORDER BY date  DESC")
     fun getAllOutComeData(): LiveData<List<BookNote>>
-    @Query("SELECT SUM(total) FROM book_note_tb WHERE menu_type = 'INCOME' ")
+    @Query("SELECT SUM(total) FROM book_note_tb WHERE menu_type = 'INCOME' ORDER BY date  DESC ")
     fun getIncomeTotal(): LiveData<String>
 
-    @Query("SELECT SUM(total) FROM book_note_tb WHERE menu_type = 'OUTCOME' ")
+    @Query("SELECT SUM(total) FROM book_note_tb WHERE menu_type = 'OUTCOME' ORDER BY date  DESC ")
     fun getOutComeTotal(): LiveData<String>
+
+    @Query("SELECT * FROM book_note_tb WHERE date = :dateData ORDER BY menu_type  ASC")
+    fun getInAndOutComeByDate(dateData : String): LiveData<List<BookNote>>
+
+
+
 
 }

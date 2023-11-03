@@ -11,15 +11,27 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_exit"
+            android:id="@+id/txt_close"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/custom_regular"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:gravity="left"
             android:text="X"
             android:textColor="@color/warm_grey"
             android:textSize="@dimen/text_xxlarge_header_size"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/custom_regular"
+            android:text="OK"
+            android:textColor="@color/teal_200"
+            android:textSize="@dimen/text_xxlarge_header_size"
+            android:layout_marginEnd="@dimen/margin_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_exit">
+            app:layout_constraintTop_toBottomOf="@+id/txt_close">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_menusID"
@@ -48,7 +60,7 @@
                 android:textSize="@dimen/text_xxlarge_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_exit" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edittext_amt"
@@ -117,26 +129,25 @@
                 android:background="@drawable/btn_red"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_button_size"
+                android:textSize="@dimen/text_small_size"
                 app:layout_constraintBottom_toBottomOf="@+id/edittext_amt"
                 app:layout_constraintEnd_toEndOf="@+id/edittext_amt"
-                app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintTop_toTopOf="@+id/edittext_amt"
                 android:text="Del" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_green_light"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_button_size"
-                android:layout_marginTop="@dimen/margin_normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintTop_toBottomOf="@+id/edittext_description"
-                android:text="OK" />
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/btn_confirm"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:background="@drawable/btn_green_light"-->
+<!--                android:gravity="center"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="@dimen/text_button_size"-->
+<!--                android:layout_marginTop="@dimen/margin_normal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_weight="1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/edittext_description"-->
+<!--                android:text="OK" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

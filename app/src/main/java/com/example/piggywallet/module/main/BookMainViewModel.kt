@@ -1,6 +1,7 @@
 package com.example.piggywallet.module.main
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.example.piggywallet.manager.ContextManager
@@ -19,6 +20,8 @@ class BookMainViewModel : ViewModel() {
     val allOutcomeMainBook: LiveData<List<BookNote>>
     val inComeTotal: LiveData<String>
     val outComeTotal: LiveData<String>
+    val whenDataLoadedInOutMainBookByDate = MutableLiveData<List<BookNote>>()
+    val whenDataLoadedBook = MutableLiveData<List<BookNote>>()
 
     init {
         //annotate Dao that want to use and get Instance of Dao from Database
@@ -26,10 +29,23 @@ class BookMainViewModel : ViewModel() {
         val bookmenusdao = RoomDatabaseManager.getInstance(context).roomDBDao()
         repository = RoomDBRepository(bookmenusdao)
         allInOutMainBook =  repository.allInOutData
+//        InOutMainBookByDate =  repository.InOutOnlyByDate()
         allIncomeMainBook = repository.allIncomeList
         allOutcomeMainBook = repository.allOutcomeList
         inComeTotal = repository.incomeTotal
         outComeTotal = repository.outcomeTotal
+    }
+
+    fun InOutOnlyByDate( date : String , item : ArrayList<BookNote>)   {
+       val newItem =  item.filter { it.date == date }.sortedBy { date }
+        whenDataLoadedInOutMainBookByDate.postValue(newItem)
+    }
+
+    fun getSearchBook(text: String  , item : ArrayList<BookNote>) {
+        val newList = ArrayList(item!!.filter {
+            it.menuName.contains(text)
+        })
+        whenDataLoadedBook.postValue(ArrayList(newList))
     }
 
 

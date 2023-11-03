@@ -27,11 +27,16 @@ class RoomDBRepository (private val roomDBDao: RoomDBDao) {
     val allOutcomeList : LiveData<List<BookNote>> = roomDBDao.getAllOutComeData()
     val incomeTotal : LiveData<String> = roomDBDao.getIncomeTotal()
     val outcomeTotal : LiveData<String> = roomDBDao.getOutComeTotal()
-
     fun insertInAndOutCome(inout: BookNote){
         CoroutineScope(Dispatchers.IO).launch {
             roomDBDao.insertInAndOutCome(inout)
         }
     }
+
+    fun InOutOnlyByDate( date : String) : LiveData<List<BookNote>>  {
+        return  roomDBDao.getInAndOutComeByDate(date)
+    }
+
+
 
 }

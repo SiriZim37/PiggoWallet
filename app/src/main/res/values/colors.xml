@@ -15,11 +15,13 @@
     <color name="terracotta_3">#FA957C</color>
     <color name="brown">#813522</color>
     <color name="bg_skip">#68d5b8</color>
+    <color name="green">#6bdbbd</color>
+    <color name="teal_500">#4ba48c</color>
     <color name="warm_grey">#959595</color>
     <color name="bg_btn_blue">#307DFA</color>
     <color name="darkblue">#4d4afb</color>
     <color name="normalblue">#307DFA</color>
     <color name="bg_disable">#e1e1e1</color>
-
+    <color name="yellow">#feb12b</color>
     <color name="sidebar_menu_title">#666666</color>
 </resources>

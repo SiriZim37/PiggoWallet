@@ -11,15 +11,40 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            app:cardCornerRadius="28dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_income"
+            app:layout_constraintEnd_toStartOf="@+id/card_income"
+            app:layout_constraintStart_toStartOf="@+id/card_inoutbound"
+            app:layout_constraintTop_toTopOf="@+id/card_income">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edit_text_search"
+                style="@style/Text_Regular_Medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_search_grey"
+
+                android:hint="search book"
+                android:singleLine="true"
+                android:textAlignment="textStart" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/card_outcome"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/margin_normal"
             android:foregroundGravity="center"
             app:cardCornerRadius="160dp"
             app:cardElevation="16dp"
-            android:textStyle="bold"
+            android:layout_marginRight="@dimen/margin_normal"
+
             app:layout_constraintEnd_toStartOf="@+id/card_calendar"
             app:layout_constraintTop_toTopOf="@+id/card_calendar">
 
@@ -58,7 +83,6 @@
                 android:id="@+id/bg_income"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_icon_circle_green"
                 android:layout_margin="4dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -85,6 +109,7 @@
             app:layout_constraintTop_toBottomOf="@id/card_outcome" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Income"
@@ -148,7 +173,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
-                android:paddingTop="@dimen/margin_12">
+                android:paddingTop="@dimen/margin_12"
+                android:paddingBottom="@dimen/margin_12">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -207,6 +233,35 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/h_outcome"
                     app:layout_constraintTop_toBottomOf="@+id/h_outcome" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/h_total_amt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="start"
+                    android:text="TOTAL"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/amt_income"
+                    app:layout_constraintTop_toBottomOf="@+id/amt_income" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/total_amt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_yellow_light"
+                    android:fontFamily="@font/custom_regular"
+                    android:gravity="center"
+                    android:text="0.00"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_extra_large_size"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    app:layout_constraintEnd_toEndOf="@+id/amt_outcome"
+                    app:layout_constraintStart_toEndOf="@+id/h_total_amt"
+                    app:layout_constraintTop_toTopOf="@+id/h_total_amt" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
