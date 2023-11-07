@@ -83,8 +83,11 @@ class BookDetailActivity : AppCompatActivity() , CoroutineScope by CoroutineScop
         view.txt_menusID.setText(itemID.menuName)
         view.btn_del.setOnClickListener {
             view.txt_menusID.setText("")
+        }
+        view.txt_close.setOnClickListener {
             dialog.dismiss()
         }
+
         view.btn_confirm.setOnClickListener {
             viewModel.saveData( itemID.menuID ,
                 itemID.menuName ,
