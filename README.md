@@ -23,3 +23,7 @@ This app is to play around learning about Kotlin. Users will be able to manage t
 - [ ] Setting
 - [x] Book Detail
 
+
+
+![ezcv logo](https://github.com/SiriZim37/PiggoWallet/blob/main/img/piggy1.png)
+![ezcv logo](https://github.com/SiriZim37/PiggoWallet/blob/main/img/piggy2.png)
