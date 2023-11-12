@@ -1,28 +1,36 @@
 package com.example.piggywallet
 
-import android.app.Application
-import com.example.piggywallet.manager.ContextManager
-import com.example.piggywallet.manager.db.DatabaseManager
-import com.example.piggywallet.manager.db.RoomDatabaseManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
+import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.example.piggywallet.module.authen.LoginActivity
+import com.example.piggywallet.utils.FirebaseUtils
 
-class MainApplication : Application(){
+class MainApplication : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash_screen)
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
-    val applicationScope = CoroutineScope(SupervisorJob())
-    init {
-        //annotate Dao that want to use and get Instance of Dao from Database
-        ContextManager.getInstance().setApplicationContext(this)
-//        RoomDatabaseManager.getInstance(this)
-//        DatabaseManager.initDB(this)
+        Handler().postDelayed({
+
+            checkUser()
+
+        }, 1000)
+
     }
 
-//    val sleepNightDao = RoomDatabaseManager.getInstance(this).masterBookMenuDao()
-//    val database by lazy {
-//        RoomDatabaseManager.getDatabase(this, applicationScope)
-//    }
-//    val repository by lazy {
-//        BookMenusRepository( database.masterBookMenuDao())
-//    }
+    private fun checkUser() {
+
+        if(FirebaseUtils.firebaseUser != null){
+            MainActivity.start(this)
+        }
+        if(FirebaseUtils.firebaseUser == null){
+            LoginActivity.open(this)
+        }
+
+    }
 }

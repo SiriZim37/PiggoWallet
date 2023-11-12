@@ -117,7 +117,7 @@ class BookMainFragment : Fragment() {
         return view
     }
     private fun initInstance() {
-
+        try {
         viewModel.allInOutMainBook.observe(viewLifecycleOwner, Observer { inoutMain ->
             inoutMain?.let {
                 try {
@@ -134,7 +134,7 @@ class BookMainFragment : Fragment() {
                         )
                         list.add(dataList)
                     }
-                    list.sortBy { it.date }
+                    list.sortByDescending { it.date }
                     itemInAndOutcome = list
 
                     book_recyclerView.layoutManager = LinearLayoutManager(context)
@@ -145,20 +145,29 @@ class BookMainFragment : Fragment() {
                 }
             }
         })
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
 
 
         viewModel.inComeTotal.observe(viewLifecycleOwner , Observer {
             it.let {
-                income_cal = it.toInt()
+                if (it.isNullOrEmpty())
+                    income_cal = 0
+                else
+                    income_cal = it.toInt()
                 amt_income.text = it
             }
         })
 
         viewModel.outComeTotal.observe(viewLifecycleOwner , Observer {
             it.let {
-                outcome_cal = it.toInt()
+                if (it.isNullOrEmpty())
+                    outcome_cal = 0
+                else
+                    outcome_cal = it.toInt()
                 val sb = StringBuilder()
-                amt_outcome.text = sb.append("-").append(it)
+                amt_outcome.text = sb.append("-").append(outcome_cal)
                 if(income_cal != null && outcome_cal != null)
                  total_amt.text = ( income_cal!!.minus(outcome_cal!!)  ).toString()
             }
@@ -302,7 +311,10 @@ class BookMainFragment : Fragment() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            viewModel.getSearchBook(s.toString() , itemInAndOutcome)
+            if(!s.toString().isNullOrEmpty())
+                viewModel.getSearchBook(s.toString() , itemInAndOutcome)
+            else
+                allInOutMainBookUpdate()
         }
 
     }
